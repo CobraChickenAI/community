@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Community — Own yours.</title>
+  <meta name="description" content="A community platform where ownership lies with the creator. Not Discord. Not Google. You.">
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --fg-secondary: #555;
+      --fg-muted: #888;
+      --bg: #fafaf9;
+      --bg-card: #fff;
+      --accent: #2d5a27;
+      --accent-light: #e8f0e7;
+      --border: #e5e5e4;
+      --border-strong: #d4d4d3;
+      --mono: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Header ─────────────────────────────────────── */
+
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    header .subtitle {
+      font-size: 1.15rem;
+      color: var(--fg-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ─── Sections ───────────────────────────────────── */
+
+    section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      color: var(--fg-secondary);
+      margin-bottom: 16px;
+    }
+
+    section p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* ─── The problem ────────────────────────────────── */
+
+    .problem {
+      font-size: 1.1rem;
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .problem p {
+      margin-bottom: 20px;
+      color: var(--fg-secondary);
+    }
+
+    .problem p:first-of-type {
+      color: var(--fg);
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    /* ─── Flow ───────────────────────────────────────── */
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 28px 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+
+    .flow-step:first-child {
+      border-radius: 8px 8px 0 0;
+    }
+
+    .flow-step:last-child {
+      border-radius: 0 0 8px 8px;
+    }
+
+    .flow-num {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .flow-text {
+      font-size: 0.95rem;
+      color: var(--fg-secondary);
+    }
+
+    .flow-text strong {
+      color: var(--fg);
+    }
+
+    /* ─── Key idea callout ───────────────────────────── */
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      margin: 28px 0;
+      background: var(--accent-light);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p {
+      color: var(--fg);
+      font-size: 1.0rem;
+      margin: 0;
+    }
+
+    /* ─── Primitives table ───────────────────────────── */
+
+    .primitives {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.92rem;
+    }
+
+    .primitives th {
+      text-align: left;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--fg-muted);
+      border-bottom: 2px solid var(--border-strong);
+    }
+
+    .primitives td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .primitives td:first-child {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .primitives td:last-child {
+      color: var(--fg-secondary);
+    }
+
+    /* ─── Relay example ──────────────────────────────── */
+
+    .relay-example {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--fg-secondary);
+      overflow-x: auto;
+    }
+
+    .relay-example .attribution {
+      color: var(--accent);
+    }
+
+    .relay-example .quoted {
+      color: var(--fg);
+    }
+
+    .relay-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--fg-muted);
+      margin-bottom: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ─── Footer ─────────────────────────────────────── */
+
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--fg-muted);
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* ─── Responsive ─────────────────────────────────── */
+
+    @media (max-width: 600px) {
+      header { padding: 56px 0 40px; }
+      header h1 { font-size: 1.9rem; }
+      header .subtitle { font-size: 1.05rem; }
+      section { padding: 36px 0; }
+      .problem { padding: 40px 0; }
+      .problem p:first-of-type { font-size: 1.1rem; }
+      .flow-step { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Community</h1>
+      <p class="subtitle">A community platform where ownership lies with the creator. Not Discord. Not Google. You.</p>
+    </header>
+
+    <!-- ─── The Problem ───────────────────────────────── -->
+
+    <div class="problem">
+      <p>Your community doesn't live in one place.</p>
+
+      <p>Some of your people are on Discord. Some are in a Google Chat space at work. Some read your Substack. A few show up on all three. Most stick to one and miss what happens everywhere else.</p>
+
+      <p>You don't have a fragmentation problem. You have an <strong>ownership problem</strong>. Your community is scattered across platforms that each think they're the whole thing. None of them are. You are.</p>
+    </div>
+
+    <!-- ─── What If ───────────────────────────────────── -->
+
+    <section>
+      <h2>What if it worked like this</h2>
+
+      <p>You set up <strong>one registration surface</strong>. Your URL. Your data. Members come there once, tell you who they are, and where they already hang out &mdash; their Discord handle, their Google Chat email, whatever.</p>
+
+      <p>Then they go back to wherever they came from. They don't have to change anything about their lives.</p>
+
+      <p>From that point on, <strong>agents</strong> &mdash; programs that watch each platform on your behalf &mdash; carry the meaningful conversations across. Not every message. Not a firehose. The ones that matter. The ones that are a complete thought.</p>
+
+      <div class="relay-label">What a relay looks like</div>
+      <div class="relay-example">
+        <span class="attribution">&#x1F4E1; from Discord &mdash; @James:</span><br>
+        <span class="quoted">&gt; I think the real issue is that none of these platforms let you own the<br>
+        &gt; relationship with your members. You're always renting.</span>
+      </div>
+
+      <p>That message started on Discord. It showed up in Google Chat. The person who said it didn't do anything &mdash; they just talked in the place they were already in. The agent decided it was worth carrying across, attached attribution so everyone knows who said it and where, and delivered it.</p>
+    </section>
+
+    <!-- ─── Identity ──────────────────────────────────── -->
+
+    <section>
+      <h2>Identity stitching</h2>
+
+      <p>When members register, they self-declare their platform handles. <em>"I'm @james on Discord and james@company.com on Google Chat."</em></p>
+
+      <p>We issue a verification code for each handle. They send it from within that platform. Once verified, the agent knows exactly who they are no matter where they speak. Their community identity travels with them.</p>
+
+      <p>This is the hard work the creator shouldn't have to do manually. You mention your accounts; we verify them.</p>
+    </section>
+
+    <!-- ─── Not Every Message ─────────────────────────── -->
+
+    <section>
+      <h2>Not every message crosses</h2>
+
+      <p>A reaction emoji doesn't need to be on Google Chat. A one-word "lol" doesn't need to be on Discord. The relay agent makes a judgment call: <strong>is this a complete thought worth carrying across a platform boundary?</strong></p>
+
+      <p>When a thread gets active on one platform, the agent doesn't relay every reply. It comes back to the other surfaces and says: <em>"There's been a lot of conversation over on Discord about this. Here's the shape of it. If you want the full thing, head over there."</em></p>
+
+      <div class="callout">
+        <p>The asymmetry of activity across surfaces is a real UX problem. The agent's job is to bridge it &mdash; not by copying everything, but by knowing what matters.</p>
+      </div>
+    </section>
+
+    <!-- ─── How It's Built ────────────────────────────── -->
+
+    <section>
+      <h2>How it's built</h2>
+
+      <p>Built on <a href="https://github.com/CobraChickenAI/themissinglayer" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">The Missing Layer</a> &mdash; nine primitives that define coherent systems. Here's how they show up:</p>
+
+      <table class="primitives">
+        <thead>
+          <tr>
+            <th>Primitive</th>
+            <th>What it is here</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Scope</td>
+            <td>The community itself. What the creator owns. The thing that persists if any platform disappears.</td>
+          </tr>
+          <tr>
+            <td>View</td>
+            <td>Each platform &mdash; Discord, Google Chat, Substack. A projection of the community, not the community itself.</td>
+          </tr>
+          <tr>
+            <td>Connector</td>
+            <td>An agent watching a platform for inbound messages. The ear.</td>
+          </tr>
+          <tr>
+            <td>Binding</td>
+            <td>An agent posting relays to a platform. The mouth.</td>
+          </tr>
+          <tr>
+            <td>Archetype</td>
+            <td>Creator, Member, Relay Agent &mdash; each with different authorities.</td>
+          </tr>
+          <tr>
+            <td>Provenance</td>
+            <td>Every relay, every registration, every verification. Immutable. Non-optional.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── The Pipeline ──────────────────────────────── -->
+
+    <section>
+      <h2>The relay pipeline</h2>
+
+      <p>Every message that enters the system goes through the same five steps:</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-num">01</span>
+          <span class="flow-text"><strong>Filter</strong> &mdash; Is this worth carrying across a boundary? Short reactions, emoji-only, and already-relayed messages are dropped.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">02</span>
+          <span class="flow-text"><strong>Resolve</strong> &mdash; Do we know who said this? Match the platform handle to a community member. Best-effort; doesn't block the relay.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">03</span>
+          <span class="flow-text"><strong>Provenance</strong> &mdash; Record that this happened. Who, where, when. Non-optional.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">04</span>
+          <span class="flow-text"><strong>Canonicalize</strong> &mdash; Save the platform-agnostic form of the message. The community's version.</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">05</span>
+          <span class="flow-text"><strong>Dispatch</strong> &mdash; Send to every active Binding except the source. Discord message goes to Google Chat. Not back to Discord.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Adding Platforms ──────────────────────────── -->
+
+    <section>
+      <h2>Adding a platform</h2>
+
+      <p>Each platform gets one agent file. The agent is simultaneously a Connector (it listens) and a Binding (it posts). To add Google Chat, Slack, or anything else:</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-num">01</span>
+          <span class="flow-text">Write an agent that watches the platform and calls the relay pipeline</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">02</span>
+          <span class="flow-text">Register its send function in the dispatch registry</span>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">03</span>
+          <span class="flow-text">Tell the community where to post on that platform</span>
+        </div>
+      </div>
+
+      <p>The relay logic doesn't change. The filter doesn't change. The provenance doesn't change. New platforms just plug in.</p>
+    </section>
+
+    <!-- ─── Footer ────────────────────────────────────── -->
+
+    <footer>
+      <div class="links">
+        <a href="https://github.com/CobraChickenAI/community">GitHub</a>
+        <a href="https://github.com/CobraChickenAI/themissinglayer">The Missing Layer</a>
+      </div>
+      <p>CC BY-SA 4.0 &mdash; CobraChickenAI</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
